@@ -17,12 +17,9 @@ def head_ckpt(percent):
     return os.path.join(SAVE_DIR, f"Final_Layer_p{percent}.pth")
 
 
-def baseline_encoder_ckpt(percent):
-    return os.path.join(SAVE_DIR, f"BLEncoder_p{percent}.pth")
+BASELINE_ENCODER_CKPT=os.path.join(SAVE_DIR,"BLEncoder.pth")
+BASELINE_FINAL_CKPT=os.path.join(SAVE_DIR,"BLFinal_Layer.pth")
 
-
-def baseline_head_ckpt(percent):
-    return os.path.join(SAVE_DIR, f"BLFinal_Layer_p{percent}.pth")
 
 
 # -------------Reproducibility---------------
