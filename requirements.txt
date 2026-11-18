@@ -1,8 +1,9 @@
-numpy
-pandas
 torch
-pillow
-matplotlib
 torchvision
 torchmetrics
+numpy
+pandas
+matplotlib
+scikit-learn
+pillow
 kagglehub
