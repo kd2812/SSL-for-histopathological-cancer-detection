@@ -8,13 +8,16 @@ from torch.utils.data import DataLoader,Dataset
 import torchvision.transforms.functional as TF
 from src.data_augmentations import norm,data_augmentation
 from config import DATA_DIR,N_PROBE_END,N_SSL_FROM_TRAIN,NUM_WORKERS
+
+
+# --------- Downloading data-----------------
 def download_data():
     """Needs Kaggle credentials in the environment"""
     import kagglehub
 
     return kagglehub.competition_download("histopathologic-cancer-detection")
 
-
+# ---------- Getting File lists for training and testing --------------
 def get_file_lists(data_dir=DATA_DIR):
     train_list=[]
     layer_list=[]
@@ -45,6 +48,8 @@ def get_file_lists(data_dir=DATA_DIR):
 
     return train_list,layer_list,test_list,labels
 
+# ---------- Dataset Class ---------------------------
+
 class DT(Dataset):
     def __init__(self,train,label_present,labels=None,p=100):
         if label_present and p<100:
@@ -74,6 +79,7 @@ class DT(Dataset):
         return norm(TF.to_tensor(img)),data_augmentation(TF.to_tensor(img))
 
 
+# ------------------ data loader function ----------------------------
 
 def make_loader(dataset, batch_size, shuffle=True):
     return DataLoader(
