@@ -3,7 +3,8 @@ from src.loss_fnc import NTXent_Loss
 from src.utils import save_checkpoint
 import matplotlib.pyplot as plt
 import os
-def train_ssl(encoder,loader,optimizer,epochs,device,tau=0.5,ckpt_path=None):
+from src.config import SSL_CKPT
+def train_ssl(encoder,loader,optimizer,epochs,device,tau=0.5,ckpt_path=SSL_CKPT):
     """returns the history of training the SSL Encoder and """
     loss_dict={}
     min_loss=None
@@ -36,10 +37,10 @@ def train_ssl(encoder,loader,optimizer,epochs,device,tau=0.5,ckpt_path=None):
                 print("-"*20)
                 if(min_loss is None or loss.item()<min_loss):
                     min_loss=loss.item()
-                    ckpt_path_encoder=os.path.join(ckpt_path,"SSLEncoder")
-                    save_checkpoint(encoder,ckpt_path_encoder)
+                    # ckpt_path_encoder=os.path.join(ckpt_path,"SSLEncoder")
+                    save_checkpoint(encoder,ckpt_path)
                     # torch.save(encoder.state_dict(),"/content/drive/MyDrive/Colab Notebooks/SSL_histo_cancer_detect/SSLEncoder.pth")
-                    print(f"saved SSLEncoder.pth, path : {ckpt_path_encoder}")
+                    print(f"saved SSLEncoder.pth, path : {ckpt_path}")
                     print("-"*20)
                 if c%100==0:
                     plt.plot(l)
